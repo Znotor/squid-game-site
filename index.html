@@ -8,11 +8,12 @@
         body {
             background-color: #000;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            font-family: Arial, sans-serif;
         }
         #grid {
             display: grid;
@@ -28,7 +29,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            font-family: Arial, sans-serif;
             color: #00ff00;
             position: relative;
             overflow: hidden;
@@ -44,6 +44,7 @@
         .cell .name {
             font-size: 10px;
             z-index: 1;
+            margin-top: 2px;
         }
     </style>
 </head>
@@ -58,11 +59,10 @@
             { name: 'Stephanie', number: '018' },
             { name: 'Figgy', number: '033' },
             { name: 'Rosemary', number: '051' },
-            // Ajoutez les autres participants ici jusqu'à 60
+            // Ajoutez les autres participants ici jusqu'à atteindre 60
         ];
 
-        // Création d'une grille en losange
-        const rows = 11; // 11 lignes pour avoir 60 cases au total
+        const rows = 11;
         let cellCount = 0;
         for (let i = 0; i < rows; i++) {
             const cellsInRow = i < 6 ? i + 4 : 14 - i;
