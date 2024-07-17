@@ -17,35 +17,36 @@
         }
         #grid {
             display: grid;
-            grid-template-columns: repeat(15, 1fr);
+            grid-template-columns: repeat(8, 1fr);
             gap: 2px;
             width: 95vw;
-            transform: rotate(45deg);
+            aspect-ratio: 2 / 1;
         }
         .cell {
             aspect-ratio: 1 / 1;
             background-color: #1a1a1a;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
             color: #00ff00;
             position: relative;
             overflow: hidden;
-            transform: rotate(-45deg);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
         .cell.active {
             background-color: #ff69b4;
         }
         .cell .number {
-            font-size: 1.5vw;
+            font-size: 2.5vw;
             font-weight: bold;
             z-index: 1;
+            margin-bottom: 0.5vw;
         }
         .cell .name {
-            font-size: 0.8vw;
+            font-size: 1vw;
             z-index: 1;
-            margin-top: 0.3vw;
+            margin-bottom: 1vw;
         }
         .cell .photo {
             position: absolute;
@@ -67,41 +68,53 @@
             { name: 'Stephanie', number: '018' },
             { name: 'Figgy', number: '033' },
             { name: 'Rosemary', number: '051' },
-            // Ajoutez les autres participants ici
+            { name: 'Kyle', number: '101' },
+            { name: 'Lorenzo', number: '161' },
+            { name: 'Chanel', number: '109' },
+            { name: 'Husnain', number: '198' },
+            { name: 'Daniel', number: '204' },
+            { name: 'Stephen', number: '222' },
+            { name: 'Rick', number: '232' },
+            { name: 'Michael', number: '245' },
+            { name: 'Ashley', number: '214' },
+            { name: 'Allison', number: '218' },
+            { name: 'Trey', number: '301' },
+            { name: 'Leann', number: '302' },
+            { name: 'Aurora', number: '399' },
+            { name: 'Roland', number: '418' },
+            { name: 'Riley', number: '423' },
+            { name: 'Bryton', number: '433' },
+            { name: 'Shelby', number: '438' },
+            { name: 'Phill', number: '451' },
+            { name: 'Tabitha', number: '455' },
+            // Ajoutez les autres participants ici jusqu'à 64
         ];
 
-        const rows = [7,8,9,10,11,10,9,8,7];
-        let participantIndex = 0;
-
-        rows.forEach((cellsInRow, rowIndex) => {
-            for (let i = 0; i < cellsInRow; i++) {
-                const cell = document.createElement('div');
-                cell.className = 'cell';
-                if ((rowIndex + i) % 2 === 0) cell.classList.add('active');
+        for (let i = 0; i < 64; i++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            if ((Math.floor(i / 8) + i) % 2 === 0) cell.classList.add('active');
+            
+            if (i < participants.length) {
+                const photo = document.createElement('img');
+                photo.className = 'photo';
+                photo.src = `https://picsum.photos/200?random=${i}`; // Remplacez par vos vraies images
                 
-                if (participantIndex < participants.length) {
-                    const photo = document.createElement('img');
-                    photo.className = 'photo';
-                    photo.src = `https://picsum.photos/200?random=${participantIndex}`;
-                    
-                    const number = document.createElement('div');
-                    number.className = 'number';
-                    number.textContent = participants[participantIndex].number;
-                    
-                    const name = document.createElement('div');
-                    name.className = 'name';
-                    name.textContent = participants[participantIndex].name;
-                    
-                    cell.appendChild(photo);
-                    cell.appendChild(number);
-                    cell.appendChild(name);
-                    
-                    participantIndex++;
-                }
+                const number = document.createElement('div');
+                number.className = 'number';
+                number.textContent = participants[i].number;
                 
-                grid.appendChild(cell);
+                const name = document.createElement('div');
+                name.className = 'name';
+                name.textContent = participants[i].name;
+                
+                cell.appendChild(photo);
+                cell.appendChild(number);
+                cell.appendChild(name);
             }
-        });
+            
+            grid.appendChild(cell);
+        }
     </script>
 </body>
 </html>
