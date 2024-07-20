@@ -18,10 +18,10 @@
         #grid {
             display: grid;
             grid-template-columns: repeat(10, 1fr);
-            gap: 4px;
-            transform: rotate(45deg) scale(0.7);
-            width: 90vmin;
-            height: 54vmin;
+            gap: 6px;
+            transform: rotate(45deg) scale(0.85);
+            width: 180vmin;
+            height: 108vmin;
         }
         .cell {
             aspect-ratio: 1;
@@ -40,15 +40,15 @@
             background-color: #ff69b4;
         }
         .cell .number {
-            font-size: 2.5vmin;
+            font-size: 4vmin;
             font-weight: bold;
             z-index: 1;
-            margin-bottom: 0.5vmin;
+            margin-bottom: 1vmin;
         }
         .cell .name {
-            font-size: 1.2vmin;
+            font-size: 2vmin;
             z-index: 1;
-            margin-bottom: 1vmin;
+            margin-bottom: 2vmin;
         }
         .cell .photo {
             position: absolute;
@@ -61,6 +61,7 @@
 </head>
 <body>
     <div id="grid"></div>
+
     <script>
         const grid = document.getElementById('grid');
         const participants = [
@@ -73,7 +74,7 @@
             // Ajoutez tous les autres participants ici jusqu'à 60
         ];
 
-        const rows = [8, 9, 10, 11, 11, 11];
+        const rows = [9, 10, 11, 12, 12, 12];
         let cellCount = 0;
 
         rows.forEach((cellsInRow, rowIndex) => {
