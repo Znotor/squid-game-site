@@ -17,13 +17,14 @@
         }
         #grid {
             display: grid;
-            grid-template-columns: repeat(8, 1fr);
-            gap: 2px;
-            width: 95vw;
-            aspect-ratio: 2 / 1;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+            transform: rotate(45deg) scale(0.7);
+            width: 90vmin;
+            height: 54vmin;
         }
         .cell {
-            aspect-ratio: 1 / 1;
+            aspect-ratio: 1;
             background-color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -32,28 +33,29 @@
             color: #00ff00;
             position: relative;
             overflow: hidden;
+            transform: rotate(-45deg);
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
         .cell.active {
             background-color: #ff69b4;
         }
         .cell .number {
-            font-size: 2.5vw;
+            font-size: 2.5vmin;
             font-weight: bold;
             z-index: 1;
-            margin-bottom: 0.5vw;
+            margin-bottom: 0.5vmin;
         }
         .cell .name {
-            font-size: 1vw;
+            font-size: 1.2vmin;
             z-index: 1;
-            margin-bottom: 1vw;
+            margin-bottom: 1vmin;
         }
         .cell .photo {
             position: absolute;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.6;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -68,53 +70,41 @@
             { name: 'Stephanie', number: '018' },
             { name: 'Figgy', number: '033' },
             { name: 'Rosemary', number: '051' },
-            { name: 'Kyle', number: '101' },
-            { name: 'Lorenzo', number: '161' },
-            { name: 'Chanel', number: '109' },
-            { name: 'Husnain', number: '198' },
-            { name: 'Daniel', number: '204' },
-            { name: 'Stephen', number: '222' },
-            { name: 'Rick', number: '232' },
-            { name: 'Michael', number: '245' },
-            { name: 'Ashley', number: '214' },
-            { name: 'Allison', number: '218' },
-            { name: 'Trey', number: '301' },
-            { name: 'Leann', number: '302' },
-            { name: 'Aurora', number: '399' },
-            { name: 'Roland', number: '418' },
-            { name: 'Riley', number: '423' },
-            { name: 'Bryton', number: '433' },
-            { name: 'Shelby', number: '438' },
-            { name: 'Phill', number: '451' },
-            { name: 'Tabitha', number: '455' },
-            // Ajoutez les autres participants ici jusqu'à 64
+            // Ajoutez tous les autres participants ici jusqu'à 60
         ];
 
-        for (let i = 0; i < 64; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'cell';
-            if ((Math.floor(i / 8) + i) % 2 === 0) cell.classList.add('active');
-            
-            if (i < participants.length) {
-                const photo = document.createElement('img');
-                photo.className = 'photo';
-                photo.src = `https://picsum.photos/200?random=${i}`; // Remplacez par vos vraies images
+        const rows = [8, 9, 10, 11, 11, 11];
+        let cellCount = 0;
+
+        rows.forEach((cellsInRow, rowIndex) => {
+            for (let i = 0; i < cellsInRow; i++) {
+                if (cellCount >= 60) break;
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                if ((rowIndex + i) % 2 === 0) cell.classList.add('active');
                 
-                const number = document.createElement('div');
-                number.className = 'number';
-                number.textContent = participants[i].number;
+                if (cellCount < participants.length) {
+                    const photo = document.createElement('img');
+                    photo.className = 'photo';
+                    photo.src = `https://picsum.photos/200?random=${cellCount}`; // Remplacez par vos vraies images
+                    
+                    const number = document.createElement('div');
+                    number.className = 'number';
+                    number.textContent = participants[cellCount].number;
+                    
+                    const name = document.createElement('div');
+                    name.className = 'name';
+                    name.textContent = participants[cellCount].name;
+                    
+                    cell.appendChild(photo);
+                    cell.appendChild(number);
+                    cell.appendChild(name);
+                }
                 
-                const name = document.createElement('div');
-                name.className = 'name';
-                name.textContent = participants[i].name;
-                
-                cell.appendChild(photo);
-                cell.appendChild(number);
-                cell.appendChild(name);
+                grid.appendChild(cell);
+                cellCount++;
             }
-            
-            grid.appendChild(cell);
-        }
+        });
     </script>
 </body>
 </html>
